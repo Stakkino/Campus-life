@@ -1,0 +1,16 @@
+.resource-card { display: flex; flex-direction: column; gap: 12px; }
+.resource-icon { width: 40px; height: 40px; border-radius: 12px; background: var(--green-soft); color: var(--color-green); display: grid; place-items: center; }
+.resource-card h3 { font-size: 15px; margin-bottom: 6px; }
+.resource-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+.resource-actions { display: flex; gap: 6px; align-items: center; }
+.resource-actions .btn { margin-right: auto; }
+.resource-actions .btn:hover { text-decoration: none; }
+
+.mode-switch { display: inline-flex; background: var(--green-soft); border-radius: 10px; padding: 3px; margin-bottom: 14px; }
+.mode-switch button { display: inline-flex; align-items: center; gap: 6px; border: 0; background: transparent; padding: 7px 14px; border-radius: 8px; font: inherit; font-size: 13.5px; cursor: pointer; color: inherit; }
+.mode-switch button.on { background: var(--color-green); color: #fff; }
+.file-pick { margin-bottom: 14px; display: grid; gap: 6px; }
+.file-drop { display: flex; align-items: center; gap: 10px; border: 2px dashed var(--color-green); border-radius: 12px; padding: 16px; cursor: pointer; color: var(--color-green); word-break: break-all; }
+.file-drop input { display: none; }
+.form-error { color: #b3261e; font-size: 13px; margin: 0 0 10px; }
+.resource-size { font-size: 12px; }
