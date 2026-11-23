@@ -1,0 +1,651 @@
+/* ==========================================================
+   STYLES SPÉCIFIQUES AUX PAGES
+   Les modules (tâches, cours, annonces, ressources) ajouteront ici leurs propres styles.
+   ========================================================== */
+
+/* ---- Dashboard ---- */
+/* Sur grand écran : alignement forcé sur 1 seule ligne (ex: 5 cartes) */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); /* Distribue équitablement l'espace */
+  grid-auto-flow: column;                                  /* Force les éléments sur la même ligne */
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+.dashboard-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--space-5);
+}
+
+@media (min-width: 1000px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ---- Modules : formulaires, publications, planning, discussion ---- */
+.muted { color: var(--color-text-muted); font-size: 0.88rem; }
+.toolbar { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; margin-bottom: var(--space-4); }
+.toolbar .search-bar { flex: 1 1 220px; }
+.list { display: grid; gap: var(--space-4); }
+.entity-form { display: grid; gap: var(--space-4); }
+.field { display: grid; gap: var(--space-1); font-weight: 600; font-size: 0.9rem; }
+.field input, .field select, .field textarea, .comment-form input, .toolbar select, .user-switcher select {
+  width: 100%; min-height: 42px; padding: 8px 12px; font: inherit; color: var(--color-text);
+  background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-sm);
+}
+.field input:focus, .field select:focus, .field textarea:focus, .comment-form input:focus { outline: 2px solid var(--color-accent); border-color: var(--color-primary); }
+.post-head, .item-row { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-3); }
+.post-head h2 { margin: var(--space-2) 0 var(--space-1); }
+.post-content { margin: var(--space-3) 0; white-space: pre-wrap; }
+.row-actions { display: flex; flex-shrink: 0; }
+.social { margin-top: var(--space-3); padding-top: var(--space-3); border-top: 1px solid var(--color-border); }
+.social-bar { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.react-btn { display: inline-flex; align-items: center; gap: 6px; min-height: 34px; padding: 0 var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-pill); background: var(--color-surface); color: var(--color-text-muted); font-weight: 600; font-size: 0.85rem; }
+.react-btn:hover { border-color: var(--color-primary); }
+.react-btn.is-active { background: var(--color-accent-soft); border-color: var(--color-accent); color: var(--color-primary); }
+.react-love.is-active svg { fill: var(--color-danger); color: var(--color-danger); }
+.react-like.is-active svg { fill: var(--color-accent); }
+.comments { display: grid; gap: var(--space-3); margin-top: var(--space-3); }
+.comment { display: flex; justify-content: space-between; gap: var(--space-2); padding: var(--space-3); background: var(--color-bg); border-radius: var(--radius-md); }
+.comment p { margin-top: 2px; }
+.comment-form { display: flex; gap: var(--space-2); }
+.task-row { display: flex; align-items: center; gap: var(--space-3); }
+.task-row input[type='checkbox'] { width: 20px; height: 20px; accent-color: var(--color-primary); }
+.task-row.is-done .task-title { text-decoration: line-through; color: var(--color-text-muted); }
+.task-main { flex: 1; min-width: 0; }
+.week { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+.day-col h2 { margin-bottom: var(--space-3); font-size: 1.05rem; }
+.course { padding: var(--space-3); margin-bottom: var(--space-2); background: var(--color-bg); border-left: 4px solid var(--color-accent); border-radius: var(--radius-sm); }
+.course strong { display: block; }
+.avatar { display: grid; place-items: center; flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; background: var(--color-primary); color: #fff; font-weight: 800; }
+.avatar.teacher { background: var(--color-accent); color: var(--color-primary); }
+.people-grid { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.chat { display: grid; gap: var(--space-3); max-height: 55vh; overflow-y: auto; padding: var(--space-2); margin-bottom: var(--space-4); }
+.msg { max-width: min(560px, 90%); padding: var(--space-3); background: var(--color-bg); border-radius: var(--radius-md); }
+.msg.mine { justify-self: end; background: var(--color-accent-soft); }
+.msg-head { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; font-size: 0.85rem; }
+.user-switcher { display: flex; align-items: center; gap: var(--space-2); margin: var(--space-3) var(--space-4); color: var(--color-text-muted); }
+.user-switcher select { min-height: 34px; font-size: 0.8rem; }
+.topbar .user-switcher { margin: 0 0 0 auto; max-width: 55%; }
+@media (min-width: 900px) { .topbar .user-switcher { display: none; } }
+.bottom-nav ul { overflow-x: auto; }
+.bottom-nav li { flex: 1 0 72px; }
+
+/* ---- Connexion ---- */
+.auth-page { min-height: 100vh; display: grid; grid-template-columns: 1fr; background: var(--color-bg); }
+.auth-hero { padding: var(--space-6) var(--space-5); background: var(--color-primary); color: #fff; display: flex; flex-direction: column; gap: var(--space-4); justify-content: center; }
+.auth-hero svg { color: var(--color-accent); }
+.auth-hero h1 { color: #fff; }
+.demo-box { display: grid; gap: 4px; padding: var(--space-4); border-radius: var(--radius-md); background: rgba(255,255,255,0.08); font-size: 0.88rem; }
+.demo-box strong { color: var(--color-accent); }
+.auth-card { padding: var(--space-5); display: grid; gap: var(--space-4); align-content: center; width: min(460px, 100%); margin: 0 auto; }
+.auth-msg { padding: var(--space-3); border-radius: var(--radius-sm); font-weight: 600; }
+.auth-error { background: var(--color-danger-soft); color: var(--color-danger); }
+.auth-ok { background: var(--color-success-soft); color: var(--color-success); }
+@media (min-width: 900px) { .auth-page { grid-template-columns: 1fr 1fr; } .auth-hero { padding: var(--space-7); } }
+
+/* ---- Espace étudiant façon Facebook ---- */
+.fb { min-height: 100vh; background: var(--color-bg); padding-bottom: var(--bottomnav-height); }
+.fb-header { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding: var(--space-2) var(--space-4); background: var(--color-primary); color: #fff; box-shadow: var(--shadow-md); }
+.fb-topnav { display: none; gap: var(--space-2); }
+.fb-topnav a { display: grid; place-items: center; width: 64px; height: 44px; border-radius: var(--radius-sm); color: rgba(255,255,255,0.7); }
+.fb-topnav a:hover { background: rgba(255,255,255,0.1); }
+.fb-topnav a.active { color: var(--color-accent); box-shadow: inset 0 -3px 0 var(--color-accent); border-radius: 0; }
+.fb-user { display: flex; align-items: center; gap: var(--space-2); }
+.fb-user .icon-btn { color: rgba(255,255,255,0.8); }
+.fb-user-name { display: none; font-weight: 700; }
+.fb-body { display: grid; grid-template-columns: 1fr; gap: var(--space-4); max-width: 1280px; margin: 0 auto; padding: var(--space-4); }
+.fb-left, .fb-right { display: none; }
+.fb-center { min-width: 0; display: grid; gap: var(--space-4); align-content: start; }
+.fb-profile { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3); border-radius: var(--radius-md); }
+.fb-link { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3); border-radius: var(--radius-md); font-weight: 600; color: var(--color-text); }
+.fb-link:hover { background: rgba(36,52,71,0.07); }
+.fb-link.active { background: var(--color-accent-soft); }
+.fb-widget { padding: var(--space-4); margin-bottom: var(--space-4); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); }
+.fb-widget h3 { margin-bottom: var(--space-3); }
+.fb-widget p { display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2); }
+.fb-contact { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2); border-radius: var(--radius-sm); color: var(--color-text); font-weight: 600; }
+.fb-contact:hover { background: var(--color-bg); }
+.fb-contact .avatar { width: 34px; height: 34px; font-size: 0.8rem; }
+.composer-input { width: 100%; padding: 10px 14px; font: inherit; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-pill); }
+textarea.composer-input { border-radius: var(--radius-md); resize: vertical; }
+.post-title { margin-top: var(--space-3); font-size: 1.05rem; }
+.fb-user .avatar { width: 36px; height: 36px; background: var(--color-accent); color: var(--color-primary); }
+.user-switcher span { font-size: 0.8rem; }
+.topbar .user-switcher { color: #fff; }
+@media (min-width: 900px) {
+  .fb { padding-bottom: 0; }
+  .fb-topnav { display: flex; }
+  .fb-user-name { display: inline; }
+  .fb-body { grid-template-columns: 240px minmax(0, 1fr); }
+  .fb-left { display: grid; align-content: start; gap: 2px; position: sticky; top: 72px; height: fit-content; }
+}
+@media (min-width: 1200px) {
+  .fb-body { grid-template-columns: 260px minmax(0, 1fr) 300px; }
+  .fb-right { display: block; position: sticky; top: 72px; height: fit-content; }
+}
+
+
+
+
+/* ==========================================================
+   CAMPUS LIFE - REFONTE DESIGN ET RESPONSIVE
+   Ajout à la fin de src/styles/pages.css
+   ========================================================== */
+
+/* ---- 1. Dashboard administrateur plus compact ---- */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  min-width: 0;
+  min-height: 88px;
+  padding: 12px 14px;
+  gap: 12px;
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  line-height: 1.1;
+}
+
+.stat-label {
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.dashboard-grid > .card {
+  min-width: 0;
+  padding: 18px;
+  border-radius: 14px;
+}
+
+.dashboard-grid .card-title {
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+
+.dashboard-grid .course {
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  border-left-width: 3px;
+  border-radius: 9px;
+}
+
+.dashboard-grid .course strong {
+  font-size: 0.9rem;
+}
+
+.dashboard-grid .course .muted,
+.dashboard-grid .item-row .muted {
+  font-size: 0.8rem;
+}
+
+.dashboard-footer {
+  margin-top: 16px;
+}
+
+/* ---- 2. Navigation étudiant : header simplifié ---- */
+
+.fb-header {
+  min-height: 62px;
+  padding: 9px 22px;
+  gap: 12px;
+}
+
+.fb-header .brand-name {
+  font-size: 1.1rem;
+}
+
+/* .fb-body {
+  gap: 20px;
+  padding: 20px;
+} */
+
+.fb-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.fb-left {
+  display: none !important;
+}
+
+.fb-center {
+  min-width: 0;
+  width: 100%;
+}
+
+@media (min-width: 1200px) {
+  .fb-body {
+    grid-template-columns: minmax(0, 1fr) 290px;
+  }
+
+  .fb-right {
+    display: block;
+  }
+}
+
+@media (max-width: 1199px) {
+  .fb-right {
+    display: none;
+  }
+}
+
+.fb-topnav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.fb-topnav::-webkit-scrollbar {
+  display: none;
+}
+
+.fb-topnav a {
+  flex: 0 0 54px;
+}
+
+@media (max-width: 600px) {
+  .fb-header {
+    flex-wrap: wrap;
+  }
+
+  .fb-topnav {
+    order: 3;
+    flex-basis: 100%;
+    justify-content: flex-start;
+    display: none;
+  }
+
+  .fb-topnav a {
+    flex: 0 0 44px;
+  }
+
+  .fb-body {
+    padding: 12px;
+  }
+}
+
+
+
+.fb-center {
+  min-width: 0;
+  gap: 16px;
+}
+
+.fb-left {
+  min-width: 0;
+}
+
+.fb-link {
+  padding: 11px 12px;
+  font-size: 0.9rem;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.fb-link.active {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.fb-widget {
+  padding: 16px;
+  margin-bottom: 14px;
+  border-radius: 14px;
+  box-shadow: var(--shadow-sm);
+}
+
+.fb-widget h3 {
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+}
+
+/* ---- 3. Navigation basse : une seule ligne, 6 menus ---- */
+
+/* .fb .bottom-nav {
+  height: calc(68px + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.fb .bottom-nav ul {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  overflow: hidden;
+  height: 100%;
+}
+
+.fb .bottom-nav li {
+  min-width: 0;
+  width: 100%;
+  flex: initial;
+}
+
+.fb .bottom-nav a {
+  min-width: 0;
+  gap: 3px;
+  padding: 5px 1px;
+  font-size: 0.65rem;
+  white-space: nowrap;
+}
+
+.fb .bottom-nav a span {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fb .bottom-nav a svg {
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+} */
+
+
+/* ---- Navigation basse : tous les rôles ---- */
+
+.bottom-nav {
+  overflow: hidden;
+}
+
+.bottom-nav ul {
+  display: flex;
+  align-items: stretch;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.bottom-nav ul::-webkit-scrollbar {
+  display: none;
+}
+
+.bottom-nav li {
+  flex: 1 0 64px;
+  min-width: 64px;
+}
+
+.bottom-nav a {
+  white-space: nowrap;
+  padding: 5px 2px;
+  font-size: 0.65rem;
+}
+
+@media (max-width: 380px) {
+  .bottom-nav li {
+    flex-basis: 58px;
+    min-width: 58px;
+  }
+
+  .bottom-nav a span {
+    font-size: 0.58rem;
+  }
+}
+
+
+
+
+
+/* ---- 4. Tablettes et fenêtres réduites ---- */
+
+@media (max-width: 1199px) {
+  .fb-body {
+    grid-template-columns: 220px minmax(0, 1fr);
+    max-width: 1100px;
+    gap: 14px;
+  }
+
+  .fb-right {
+    display: none;
+  }
+}
+
+@media (max-width: 899px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .app-content {
+    padding: 18px 14px 90px;
+  }
+
+  .fb {
+    padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .fb-header {
+    min-height: 58px;
+    padding: 8px 14px;
+  }
+
+  .fb-body {
+    display: block;
+    padding: 14px;
+  }
+
+  .fb-left,
+  .fb-right {
+    display: none !important;
+  }
+
+  .fb-center {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .fb-user-name {
+    display: none;
+  }
+}
+
+/* ---- 5. Petits écrans ---- */
+
+@media (max-width: 600px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .stat-card {
+    min-height: 78px;
+    padding: 10px;
+    gap: 9px;
+  }
+
+  .stat-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .stat-icon svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .stat-value {
+    font-size: 1.3rem;
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .dashboard-grid > .card {
+    padding: 14px;
+  }
+
+  .page-header {
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .page-header h1 {
+    font-size: 1.45rem;
+  }
+
+  .fb-header {
+    padding: 8px 12px;
+  }
+
+  .fb-header .brand-name {
+    font-size: 1rem;
+  }
+
+  .fb-header .brand-mark {
+    width: 34px;
+    height: 34px;
+  }
+
+  .fb-body {
+    padding: 10px;
+  }
+
+  .fb-center {
+    gap: 12px;
+  }
+
+  .fb .bottom-nav a {
+    font-size: 0.59rem;
+  }
+
+  .fb .bottom-nav a svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* ---- 6. Très petits écrans ---- */
+
+@media (max-width: 380px) {
+  .fb .bottom-nav a span {
+    display: none;
+  }
+
+  .fb .bottom-nav a svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .fb-user .avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .fb .bottom-nav {
+    height: calc(60px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .fb {
+    padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .stat-card {
+    padding: 9px;
+  }
+}
+
+/* ---- 7. Empêcher les débordements horizontaux ---- */
+
+.app-shell,
+.app-main,
+.app-content,
+.fb,
+.fb-body,
+.fb-center,
+.page {
+  min-width: 0;
+}
+
+img,
+video,
+iframe {
+  max-width: 100%;
+}
+
+input,
+select,
+textarea {
+  max-width: 100%;
+}
+
+
+
+/* ---- 8. Préserver une interface accessible ---- */
+
+@media (prefers-reduced-motion: reduce) {
+  .stat-card {
+    transition: none;
+  }
+}
+
+
+
+
+@media (min-width: 900px) {
+  .fb-topnav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .bottom-nav {
+    display: none !important;
+  }
+}
